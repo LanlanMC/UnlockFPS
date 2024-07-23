@@ -38,6 +38,7 @@
             CBAutoClose = new CheckBox();
             CBStartMinimized = new CheckBox();
             TabLaunchOptions = new TabPage();
+            CBUseHDR = new CheckBox();
             CBUseMobileUI = new CheckBox();
             InputMonitorNum = new NumericUpDown();
             LabelMonitor = new Label();
@@ -71,21 +72,23 @@
             // 
             LabelAutoSave.AutoSize = true;
             LabelAutoSave.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            LabelAutoSave.Location = new Point(12, 9);
+            LabelAutoSave.Location = new Point(19, 14);
+            LabelAutoSave.Margin = new Padding(5, 0, 5, 0);
             LabelAutoSave.Name = "LabelAutoSave";
-            LabelAutoSave.Size = new Size(219, 15);
+            LabelAutoSave.Size = new Size(212, 25);
             LabelAutoSave.TabIndex = 0;
-            LabelAutoSave.Text = "All settings will be saved automatically";
+            LabelAutoSave.Text = "所有设置都会自动保存";
             // 
             // TabCtrlSettings
             // 
             TabCtrlSettings.Controls.Add(TabGeneral);
             TabCtrlSettings.Controls.Add(TabLaunchOptions);
             TabCtrlSettings.Controls.Add(TabDlls);
-            TabCtrlSettings.Location = new Point(12, 27);
+            TabCtrlSettings.Location = new Point(19, 43);
+            TabCtrlSettings.Margin = new Padding(5);
             TabCtrlSettings.Name = "TabCtrlSettings";
             TabCtrlSettings.SelectedIndex = 0;
-            TabCtrlSettings.Size = new Size(260, 222);
+            TabCtrlSettings.Size = new Size(409, 355);
             TabCtrlSettings.TabIndex = 1;
             // 
             // TabGeneral
@@ -95,68 +98,75 @@
             TabGeneral.Controls.Add(CBPowerSave);
             TabGeneral.Controls.Add(CBAutoClose);
             TabGeneral.Controls.Add(CBStartMinimized);
-            TabGeneral.Location = new Point(4, 24);
+            TabGeneral.Location = new Point(4, 33);
+            TabGeneral.Margin = new Padding(5);
             TabGeneral.Name = "TabGeneral";
-            TabGeneral.Padding = new Padding(3);
-            TabGeneral.Size = new Size(252, 194);
+            TabGeneral.Padding = new Padding(5);
+            TabGeneral.Size = new Size(401, 318);
             TabGeneral.TabIndex = 0;
-            TabGeneral.Text = "General";
+            TabGeneral.Text = "常规";
             TabGeneral.UseVisualStyleBackColor = true;
             // 
             // ComboPriority
             // 
             ComboPriority.FormattingEnabled = true;
-            ComboPriority.Items.AddRange(new object[] { "Realtime", "High", "Above Normal", "Normal", "Below Normal", "Low" });
-            ComboPriority.Location = new Point(125, 82);
+            ComboPriority.Items.AddRange(new object[] { "实时", "高", "高于正常", "正常", "低于正常", "低" });
+            ComboPriority.Location = new Point(196, 131);
+            ComboPriority.Margin = new Padding(5);
             ComboPriority.Name = "ComboPriority";
-            ComboPriority.Size = new Size(121, 23);
+            ComboPriority.Size = new Size(188, 32);
             ComboPriority.TabIndex = 5;
-            ComboPriority.Text = "Normal";
+            ComboPriority.Text = "正常";
             // 
             // LabelPriority
             // 
             LabelPriority.AutoSize = true;
-            LabelPriority.Location = new Point(3, 85);
+            LabelPriority.Location = new Point(5, 136);
+            LabelPriority.Margin = new Padding(5, 0, 5, 0);
             LabelPriority.Name = "LabelPriority";
-            LabelPriority.Size = new Size(122, 15);
+            LabelPriority.Size = new Size(136, 24);
             LabelPriority.TabIndex = 4;
-            LabelPriority.Text = "Game Process Priority";
+            LabelPriority.Text = "游戏进程优先级";
             // 
             // CBPowerSave
             // 
             CBPowerSave.AutoSize = true;
-            CBPowerSave.Location = new Point(6, 56);
+            CBPowerSave.Location = new Point(9, 90);
+            CBPowerSave.Margin = new Padding(5);
             CBPowerSave.Name = "CBPowerSave";
-            CBPowerSave.Size = new Size(97, 19);
+            CBPowerSave.Size = new Size(108, 28);
             CBPowerSave.TabIndex = 3;
-            CBPowerSave.Text = "Power Saving";
-            ToolTipSettings.SetToolTip(CBPowerSave, "Sets fps to 10 and low process priority upon losing focus (e.g. tabbing out of game)");
+            CBPowerSave.Text = "省电模式";
+            ToolTipSettings.SetToolTip(CBPowerSave, "在游戏失去焦点时（如切换窗口）降低游戏优先级并将帧率设为10FPS");
             CBPowerSave.UseVisualStyleBackColor = true;
             // 
             // CBAutoClose
             // 
             CBAutoClose.AutoSize = true;
-            CBAutoClose.Location = new Point(6, 31);
+            CBAutoClose.Location = new Point(9, 50);
+            CBAutoClose.Margin = new Padding(5);
             CBAutoClose.Name = "CBAutoClose";
-            CBAutoClose.Size = new Size(84, 19);
+            CBAutoClose.Size = new Size(108, 28);
             CBAutoClose.TabIndex = 2;
-            CBAutoClose.Text = "Auto Close";
-            ToolTipSettings.SetToolTip(CBAutoClose, "Unlocker will exit upon game closing");
+            CBAutoClose.Text = "自动关闭";
+            ToolTipSettings.SetToolTip(CBAutoClose, "游戏关闭时自动关闭解锁器");
             CBAutoClose.UseVisualStyleBackColor = true;
             // 
             // CBStartMinimized
             // 
             CBStartMinimized.AutoSize = true;
-            CBStartMinimized.Location = new Point(6, 6);
+            CBStartMinimized.Location = new Point(9, 10);
+            CBStartMinimized.Margin = new Padding(5);
             CBStartMinimized.Name = "CBStartMinimized";
-            CBStartMinimized.Size = new Size(167, 19);
+            CBStartMinimized.Size = new Size(126, 28);
             CBStartMinimized.TabIndex = 1;
-            CBStartMinimized.Text = "Start Minimized (Unlocker)";
-            ToolTipSettings.SetToolTip(CBStartMinimized, "Unlocker will minimized to tray on starup");
+            CBStartMinimized.Text = "启动最小化";
+            ToolTipSettings.SetToolTip(CBStartMinimized, "解锁器启动时最小化");
             CBStartMinimized.UseVisualStyleBackColor = true;
             // 
             // TabLaunchOptions
             // 
+            TabLaunchOptions.Controls.Add(CBUseHDR);
             TabLaunchOptions.Controls.Add(CBUseMobileUI);
             TabLaunchOptions.Controls.Add(InputMonitorNum);
             TabLaunchOptions.Controls.Add(LabelMonitor);
@@ -169,129 +179,154 @@
             TabLaunchOptions.Controls.Add(CBCustomRes);
             TabLaunchOptions.Controls.Add(CBFullscreen);
             TabLaunchOptions.Controls.Add(CBPopup);
-            TabLaunchOptions.Location = new Point(4, 24);
+            TabLaunchOptions.Location = new Point(4, 33);
+            TabLaunchOptions.Margin = new Padding(5);
             TabLaunchOptions.Name = "TabLaunchOptions";
-            TabLaunchOptions.Padding = new Padding(3);
-            TabLaunchOptions.Size = new Size(252, 194);
+            TabLaunchOptions.Padding = new Padding(5);
+            TabLaunchOptions.Size = new Size(401, 318);
             TabLaunchOptions.TabIndex = 1;
-            TabLaunchOptions.Text = "Launch Options";
+            TabLaunchOptions.Text = "启动选项";
             TabLaunchOptions.UseVisualStyleBackColor = true;
+            // 
+            // CBUseHDR
+            // 
+            CBUseHDR.AutoSize = true;
+            CBUseHDR.Location = new Point(174, 10);
+            CBUseHDR.Margin = new Padding(5);
+            CBUseHDR.Name = "CBUseHDR";
+            CBUseHDR.Size = new Size(112, 28);
+            CBUseHDR.TabIndex = 4;
+            CBUseHDR.Text = "使用HDR";
+            ToolTipSettings.SetToolTip(CBUseHDR, "启用原生Windows HDR。\r\n要求显示器支持HDR，否则可能出现过曝。");
+            CBUseHDR.UseVisualStyleBackColor = true;
             // 
             // CBUseMobileUI
             // 
             CBUseMobileUI.AutoSize = true;
-            CBUseMobileUI.Location = new Point(6, 81);
+            CBUseMobileUI.Location = new Point(9, 130);
+            CBUseMobileUI.Margin = new Padding(5);
             CBUseMobileUI.Name = "CBUseMobileUI";
-            CBUseMobileUI.Size = new Size(99, 19);
-            CBUseMobileUI.TabIndex = 11;
-            CBUseMobileUI.Text = "Use Mobile UI";
+            CBUseMobileUI.Size = new Size(144, 28);
+            CBUseMobileUI.TabIndex = 3;
+            CBUseMobileUI.Text = "使用移动端UI";
             CBUseMobileUI.UseVisualStyleBackColor = true;
             // 
             // InputMonitorNum
             // 
-            InputMonitorNum.Location = new Point(111, 168);
+            InputMonitorNum.Location = new Point(174, 269);
+            InputMonitorNum.Margin = new Padding(5);
             InputMonitorNum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             InputMonitorNum.Name = "InputMonitorNum";
-            InputMonitorNum.Size = new Size(135, 23);
-            InputMonitorNum.TabIndex = 10;
+            InputMonitorNum.Size = new Size(212, 30);
+            InputMonitorNum.TabIndex = 8;
             InputMonitorNum.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // LabelMonitor
             // 
             LabelMonitor.AutoSize = true;
-            LabelMonitor.Location = new Point(6, 170);
+            LabelMonitor.Location = new Point(9, 272);
+            LabelMonitor.Margin = new Padding(5, 0, 5, 0);
             LabelMonitor.Name = "LabelMonitor";
-            LabelMonitor.Size = new Size(56, 15);
+            LabelMonitor.Size = new Size(82, 24);
             LabelMonitor.TabIndex = 9;
-            LabelMonitor.Text = "Monitor: ";
+            LabelMonitor.Text = "显示器：";
             // 
             // ComboFullscreenMode
             // 
             ComboFullscreenMode.FormattingEnabled = true;
-            ComboFullscreenMode.Items.AddRange(new object[] { "Borderless", "Exclusive" });
-            ComboFullscreenMode.Location = new Point(111, 139);
+            ComboFullscreenMode.Items.AddRange(new object[] { "无边框", "独占" });
+            ComboFullscreenMode.Location = new Point(174, 222);
+            ComboFullscreenMode.Margin = new Padding(5);
             ComboFullscreenMode.Name = "ComboFullscreenMode";
-            ComboFullscreenMode.Size = new Size(135, 23);
-            ComboFullscreenMode.TabIndex = 8;
-            ComboFullscreenMode.Text = "Borderless";
+            ComboFullscreenMode.Size = new Size(210, 32);
+            ComboFullscreenMode.TabIndex = 7;
+            ComboFullscreenMode.Text = "无边框";
             // 
             // LabelWindowMode
             // 
             LabelWindowMode.AutoSize = true;
-            LabelWindowMode.Location = new Point(6, 142);
+            LabelWindowMode.Location = new Point(9, 227);
+            LabelWindowMode.Margin = new Padding(5, 0, 5, 0);
             LabelWindowMode.Name = "LabelWindowMode";
-            LabelWindowMode.Size = new Size(97, 15);
+            LabelWindowMode.Size = new Size(100, 24);
             LabelWindowMode.TabIndex = 7;
-            LabelWindowMode.Text = "Fullscreen Mode:";
+            LabelWindowMode.Text = "全屏模式：";
             // 
             // InputResY
             // 
-            InputResY.Location = new Point(191, 110);
+            InputResY.Location = new Point(300, 176);
+            InputResY.Margin = new Padding(5);
             InputResY.Maximum = new decimal(new int[] { 4320, 0, 0, 0 });
             InputResY.Minimum = new decimal(new int[] { 200, 0, 0, 0 });
             InputResY.Name = "InputResY";
-            InputResY.Size = new Size(55, 23);
+            InputResY.Size = new Size(86, 30);
             InputResY.TabIndex = 6;
             InputResY.Value = new decimal(new int[] { 1080, 0, 0, 0 });
             // 
             // LabelX
             // 
             LabelX.AutoSize = true;
-            LabelX.Location = new Point(172, 112);
+            LabelX.Location = new Point(270, 179);
+            LabelX.Margin = new Padding(5, 0, 5, 0);
             LabelX.Name = "LabelX";
-            LabelX.Size = new Size(13, 15);
+            LabelX.Size = new Size(23, 24);
             LabelX.TabIndex = 5;
-            LabelX.Text = "x";
+            LabelX.Text = "×";
             // 
             // InputResX
             // 
-            InputResX.Location = new Point(111, 110);
+            InputResX.Location = new Point(174, 176);
+            InputResX.Margin = new Padding(5);
             InputResX.Maximum = new decimal(new int[] { 7680, 0, 0, 0 });
             InputResX.Minimum = new decimal(new int[] { 200, 0, 0, 0 });
             InputResX.Name = "InputResX";
-            InputResX.Size = new Size(55, 23);
-            InputResX.TabIndex = 4;
+            InputResX.Size = new Size(86, 30);
+            InputResX.TabIndex = 5;
             InputResX.Value = new decimal(new int[] { 1920, 0, 0, 0 });
             // 
             // LabelCustomRes
             // 
             LabelCustomRes.AutoSize = true;
-            LabelCustomRes.Location = new Point(6, 112);
+            LabelCustomRes.Location = new Point(9, 179);
+            LabelCustomRes.Margin = new Padding(5, 0, 5, 0);
             LabelCustomRes.Name = "LabelCustomRes";
-            LabelCustomRes.Size = new Size(69, 15);
+            LabelCustomRes.Size = new Size(82, 24);
             LabelCustomRes.TabIndex = 3;
-            LabelCustomRes.Text = "Resolution: ";
+            LabelCustomRes.Text = "分辨率：";
             // 
             // CBCustomRes
             // 
             CBCustomRes.AutoSize = true;
-            CBCustomRes.Location = new Point(6, 56);
+            CBCustomRes.Location = new Point(9, 90);
+            CBCustomRes.Margin = new Padding(5);
             CBCustomRes.Name = "CBCustomRes";
-            CBCustomRes.Size = new Size(127, 19);
+            CBCustomRes.Size = new Size(144, 28);
             CBCustomRes.TabIndex = 2;
-            CBCustomRes.Text = "Custom Resolution";
+            CBCustomRes.Text = "自定义分辨率";
             CBCustomRes.UseVisualStyleBackColor = true;
             CBCustomRes.CheckStateChanged += LaunchOptionsChanged;
             // 
             // CBFullscreen
             // 
             CBFullscreen.AutoSize = true;
-            CBFullscreen.Location = new Point(6, 31);
+            CBFullscreen.Location = new Point(9, 50);
+            CBFullscreen.Margin = new Padding(5);
             CBFullscreen.Name = "CBFullscreen";
-            CBFullscreen.Size = new Size(79, 19);
+            CBFullscreen.Size = new Size(72, 28);
             CBFullscreen.TabIndex = 1;
-            CBFullscreen.Text = "Fullscreen";
+            CBFullscreen.Text = "全屏";
             CBFullscreen.UseVisualStyleBackColor = true;
             CBFullscreen.CheckStateChanged += LaunchOptionsChanged;
             // 
             // CBPopup
             // 
             CBPopup.AutoSize = true;
-            CBPopup.Location = new Point(6, 6);
+            CBPopup.Location = new Point(9, 10);
+            CBPopup.Margin = new Padding(5);
             CBPopup.Name = "CBPopup";
-            CBPopup.Size = new Size(127, 19);
+            CBPopup.Size = new Size(144, 28);
             CBPopup.TabIndex = 0;
-            CBPopup.Text = "Borderless Window";
+            CBPopup.Text = "无边框窗口化";
             CBPopup.UseVisualStyleBackColor = true;
             CBPopup.CheckStateChanged += LaunchOptionsChanged;
             // 
@@ -302,10 +337,11 @@
             TabDlls.Controls.Add(BtnAddDll);
             TabDlls.Controls.Add(ListBoxDlls);
             TabDlls.Controls.Add(label1);
-            TabDlls.Location = new Point(4, 24);
+            TabDlls.Location = new Point(4, 33);
+            TabDlls.Margin = new Padding(5);
             TabDlls.Name = "TabDlls";
-            TabDlls.Padding = new Padding(3);
-            TabDlls.Size = new Size(252, 194);
+            TabDlls.Padding = new Padding(5);
+            TabDlls.Size = new Size(401, 318);
             TabDlls.TabIndex = 2;
             TabDlls.Text = "DLLs";
             TabDlls.UseVisualStyleBackColor = true;
@@ -313,41 +349,45 @@
             // CBSuspendLoad
             // 
             CBSuspendLoad.AutoSize = true;
-            CBSuspendLoad.Location = new Point(138, 79);
+            CBSuspendLoad.Location = new Point(217, 126);
+            CBSuspendLoad.Margin = new Padding(5);
             CBSuspendLoad.Name = "CBSuspendLoad";
-            CBSuspendLoad.Size = new Size(100, 19);
+            CBSuspendLoad.Size = new Size(126, 28);
             CBSuspendLoad.TabIndex = 4;
-            CBSuspendLoad.Text = "Suspend Load";
-            ToolTipSettings.SetToolTip(CBSuspendLoad, "This can ensure dll gets loaded before the game starts\r\nIt may not work all the times\r\nUncheck this if the game crashes");
+            CBSuspendLoad.Text = "注入时暂停";
+            ToolTipSettings.SetToolTip(CBSuspendLoad, "这可以保证所有dll都在游戏启动前完成注入\r\n它可能不总是有效\r\n如果游戏崩溃，取消选中此项");
             CBSuspendLoad.UseVisualStyleBackColor = true;
             // 
             // BtnRemoveDll
             // 
-            BtnRemoveDll.Location = new Point(132, 50);
+            BtnRemoveDll.Location = new Point(207, 80);
+            BtnRemoveDll.Margin = new Padding(5);
             BtnRemoveDll.Name = "BtnRemoveDll";
-            BtnRemoveDll.Size = new Size(114, 23);
+            BtnRemoveDll.Size = new Size(179, 37);
             BtnRemoveDll.TabIndex = 3;
-            BtnRemoveDll.Text = "Remove";
+            BtnRemoveDll.Text = "移除";
             BtnRemoveDll.UseVisualStyleBackColor = true;
             BtnRemoveDll.Click += BtnRemoveDll_Click;
             // 
             // BtnAddDll
             // 
-            BtnAddDll.Location = new Point(132, 21);
+            BtnAddDll.Location = new Point(207, 34);
+            BtnAddDll.Margin = new Padding(5);
             BtnAddDll.Name = "BtnAddDll";
-            BtnAddDll.Size = new Size(114, 23);
+            BtnAddDll.Size = new Size(179, 37);
             BtnAddDll.TabIndex = 2;
-            BtnAddDll.Text = "Add";
+            BtnAddDll.Text = "添加";
             BtnAddDll.UseVisualStyleBackColor = true;
             BtnAddDll.Click += BtnAddDll_Click;
             // 
             // ListBoxDlls
             // 
             ListBoxDlls.FormattingEnabled = true;
-            ListBoxDlls.ItemHeight = 15;
-            ListBoxDlls.Location = new Point(6, 21);
+            ListBoxDlls.ItemHeight = 24;
+            ListBoxDlls.Location = new Point(9, 34);
+            ListBoxDlls.Margin = new Padding(5);
             ListBoxDlls.Name = "ListBoxDlls";
-            ListBoxDlls.Size = new Size(120, 169);
+            ListBoxDlls.Size = new Size(186, 268);
             ListBoxDlls.TabIndex = 1;
             ListBoxDlls.Format += ListBoxDlls_Format;
             ListBoxDlls.MouseMove += ListBoxDlls_MouseMove;
@@ -355,11 +395,12 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(6, 3);
+            label1.Location = new Point(9, 5);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(232, 15);
+            label1.Size = new Size(212, 24);
             label1.TabIndex = 0;
-            label1.Text = "DLLs will be injected in the order of this list";
+            label1.Text = "dll会按照列表的顺序注入";
             // 
             // ToolTipSettings
             // 
@@ -369,23 +410,24 @@
             // 
             // DllAddDialog
             // 
-            DllAddDialog.Filter = "DLL (*.dll)|*.dll|All files (*.*)|*.*";
+            DllAddDialog.Filter = "DLL (*.dll)|*.dll|所有文件 (*.*)|*.*";
             DllAddDialog.Multiselect = true;
             DllAddDialog.RestoreDirectory = true;
             // 
             // SettingsForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(284, 261);
+            ClientSize = new Size(446, 418);
             Controls.Add(TabCtrlSettings);
             Controls.Add(LabelAutoSave);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(5);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "SettingsForm";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Settings";
+            Text = "设置";
             FormClosing += SettingsForm_FormClosing;
             Load += SettingsForm_Load;
             TabCtrlSettings.ResumeLayout(false);
@@ -420,7 +462,6 @@
         private Label LabelCustomRes;
         private CheckBox CBCustomRes;
         private CheckBox CBFullscreen;
-        private CheckBox CBPopup;
         private NumericUpDown InputMonitorNum;
         private Label LabelMonitor;
         private ComboBox ComboFullscreenMode;
@@ -433,5 +474,7 @@
         private CheckBox CBSuspendLoad;
         private CheckBox CBUseMobileUI;
         private OpenFileDialog DllAddDialog;
+        private CheckBox CBUseHDR;
+        private CheckBox CBPopup;
     }
 }

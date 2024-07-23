@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using unlockfps_nc.Model;
 
 namespace unlockfps_nc.Service
@@ -32,9 +27,7 @@ namespace unlockfps_nc.Service
             }
             catch (Exception)
             {
-                MessageBox.Show(
-                    @$"Failed to load config file{Environment.NewLine}Your config file doesn't appear to be in the correct format. It will be reset to default.",
-                    @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(@$"无法加载配置文件。{Environment.NewLine}配置文件的格式不正确，它将重置为默认值。", @"警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Config = new();
             }
         }
@@ -53,6 +46,5 @@ namespace unlockfps_nc.Service
             var json = JsonConvert.SerializeObject(Config, Formatting.Indented);
             File.WriteAllText(ConfigName, json);
         }
-
     }
 }

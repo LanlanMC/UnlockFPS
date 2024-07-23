@@ -52,10 +52,12 @@
             // 
             // OptionsMenuStrip
             // 
+            OptionsMenuStrip.ImageScalingSize = new Size(24, 24);
             OptionsMenuStrip.Items.AddRange(new ToolStripItem[] { optionsToolStripMenuItem });
             OptionsMenuStrip.Location = new Point(0, 0);
             OptionsMenuStrip.Name = "OptionsMenuStrip";
-            OptionsMenuStrip.Size = new Size(284, 24);
+            OptionsMenuStrip.Padding = new Padding(9, 3, 0, 3);
+            OptionsMenuStrip.Size = new Size(446, 34);
             OptionsMenuStrip.TabIndex = 0;
             OptionsMenuStrip.Text = "menuStrip1";
             // 
@@ -63,56 +65,59 @@
             // 
             optionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { SettingsMenuItem, SetupMenuItem, AboutMenuItem });
             optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            optionsToolStripMenuItem.Size = new Size(61, 20);
-            optionsToolStripMenuItem.Text = "Options";
+            optionsToolStripMenuItem.Size = new Size(62, 28);
+            optionsToolStripMenuItem.Text = "选项";
             // 
             // SettingsMenuItem
             // 
             SettingsMenuItem.Name = "SettingsMenuItem";
-            SettingsMenuItem.Size = new Size(116, 22);
-            SettingsMenuItem.Text = "Settings";
+            SettingsMenuItem.Size = new Size(270, 34);
+            SettingsMenuItem.Text = "设置";
             SettingsMenuItem.Click += SettingsMenuItem_Click;
             // 
             // SetupMenuItem
             // 
             SetupMenuItem.Name = "SetupMenuItem";
-            SetupMenuItem.Size = new Size(116, 22);
-            SetupMenuItem.Text = "Setup";
+            SetupMenuItem.Size = new Size(270, 34);
+            SetupMenuItem.Text = "游戏路径";
             SetupMenuItem.Click += SetupMenuItem_Click;
             // 
             // AboutMenuItem
             // 
             AboutMenuItem.Name = "AboutMenuItem";
-            AboutMenuItem.Size = new Size(116, 22);
-            AboutMenuItem.Text = "About";
+            AboutMenuItem.Size = new Size(270, 34);
+            AboutMenuItem.Text = "关于";
             AboutMenuItem.Click += AboutMenuItem_Click;
             // 
             // LabelFPS
             // 
             LabelFPS.AutoSize = true;
-            LabelFPS.Location = new Point(12, 33);
+            LabelFPS.Location = new Point(19, 53);
+            LabelFPS.Margin = new Padding(5, 0, 5, 0);
             LabelFPS.Name = "LabelFPS";
-            LabelFPS.Size = new Size(29, 15);
+            LabelFPS.Size = new Size(64, 24);
             LabelFPS.TabIndex = 1;
-            LabelFPS.Text = "FPS:";
+            LabelFPS.Text = "帧率：";
             // 
             // InputFPS
             // 
-            InputFPS.Location = new Point(47, 31);
+            InputFPS.Location = new Point(74, 50);
+            InputFPS.Margin = new Padding(5, 5, 5, 5);
             InputFPS.Maximum = new decimal(new int[] { 420, 0, 0, 0 });
             InputFPS.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             InputFPS.Name = "InputFPS";
-            InputFPS.Size = new Size(225, 23);
+            InputFPS.Size = new Size(354, 30);
             InputFPS.TabIndex = 2;
             InputFPS.Value = new decimal(new int[] { 120, 0, 0, 0 });
             // 
             // SliderFPS
             // 
-            SliderFPS.Location = new Point(12, 60);
+            SliderFPS.Location = new Point(19, 96);
+            SliderFPS.Margin = new Padding(5, 5, 5, 5);
             SliderFPS.Maximum = 420;
             SliderFPS.Minimum = 1;
             SliderFPS.Name = "SliderFPS";
-            SliderFPS.Size = new Size(260, 45);
+            SliderFPS.Size = new Size(409, 69);
             SliderFPS.TabIndex = 3;
             SliderFPS.TickStyle = TickStyle.None;
             SliderFPS.Value = 120;
@@ -120,53 +125,56 @@
             // CBAutoStart
             // 
             CBAutoStart.AutoSize = true;
-            CBAutoStart.Location = new Point(12, 90);
+            CBAutoStart.Location = new Point(19, 144);
+            CBAutoStart.Margin = new Padding(5, 5, 5, 5);
             CBAutoStart.Name = "CBAutoStart";
-            CBAutoStart.Size = new Size(161, 19);
+            CBAutoStart.Size = new Size(144, 28);
             CBAutoStart.TabIndex = 4;
-            CBAutoStart.Text = "Start Game Automatically";
-            ToolTipMain.SetToolTip(CBAutoStart, "This will take effect on subsequent launch");
+            CBAutoStart.Text = "自动启动游戏";
+            ToolTipMain.SetToolTip(CBAutoStart, "这将在下次启动时生效");
             CBAutoStart.UseVisualStyleBackColor = true;
             // 
             // BtnStartGame
             // 
-            BtnStartGame.Location = new Point(197, 86);
+            BtnStartGame.Location = new Point(310, 139);
+            BtnStartGame.Margin = new Padding(5, 5, 5, 5);
             BtnStartGame.Name = "BtnStartGame";
-            BtnStartGame.Size = new Size(75, 23);
+            BtnStartGame.Size = new Size(118, 41);
             BtnStartGame.TabIndex = 5;
-            BtnStartGame.Text = "Start Game";
+            BtnStartGame.Text = "原神，启动!";
             BtnStartGame.UseVisualStyleBackColor = true;
             BtnStartGame.Click += BtnStartGame_Click;
             // 
             // NotifyIconMain
             // 
             NotifyIconMain.BalloonTipIcon = ToolTipIcon.Info;
-            NotifyIconMain.BalloonTipText = "Minimized to tray";
-            NotifyIconMain.BalloonTipTitle = "FPS Unlocker";
+            NotifyIconMain.BalloonTipText = "最小化至托盘";
+            NotifyIconMain.BalloonTipTitle = "原神FPS解锁器";
             NotifyIconMain.ContextMenuStrip = ContextNotify;
             NotifyIconMain.Icon = (Icon)resources.GetObject("NotifyIconMain.Icon");
-            NotifyIconMain.Text = "FPS Unlocker";
+            NotifyIconMain.Text = "原神FPS解锁器";
             NotifyIconMain.Visible = true;
             NotifyIconMain.DoubleClick += NotifyIconMain_DoubleClick;
             // 
             // ContextNotify
             // 
+            ContextNotify.ImageScalingSize = new Size(24, 24);
             ContextNotify.Items.AddRange(new ToolStripItem[] { ExitMenuItem });
             ContextNotify.Name = "ContextNotify";
-            ContextNotify.Size = new Size(94, 26);
+            ContextNotify.Size = new Size(112, 34);
             // 
             // ExitMenuItem
             // 
             ExitMenuItem.Name = "ExitMenuItem";
-            ExitMenuItem.Size = new Size(93, 22);
-            ExitMenuItem.Text = "Exit";
+            ExitMenuItem.Size = new Size(111, 30);
+            ExitMenuItem.Text = "退出";
             ExitMenuItem.Click += ExitMenuItem_Click;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(284, 121);
+            ClientSize = new Size(446, 194);
             Controls.Add(BtnStartGame);
             Controls.Add(CBAutoStart);
             Controls.Add(SliderFPS);
@@ -176,10 +184,11 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = OptionsMenuStrip;
+            Margin = new Padding(5, 5, 5, 5);
             MaximizeBox = false;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Genshin FPS Unlocker";
+            Text = "原神FPS解锁器";
             FormClosing += MainForm_FormClosing;
             Load += MainForm_Load;
             Resize += MainForm_Resize;

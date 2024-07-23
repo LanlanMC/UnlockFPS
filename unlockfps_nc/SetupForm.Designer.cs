@@ -41,63 +41,70 @@
             // LabelResult
             // 
             LabelResult.AutoSize = true;
-            LabelResult.Location = new Point(12, 48);
+            LabelResult.Location = new Point(19, 77);
+            LabelResult.Margin = new Padding(5, 0, 5, 0);
             LabelResult.Name = "LabelResult";
-            LabelResult.Size = new Size(67, 15);
+            LabelResult.Size = new Size(109, 24);
             LabelResult.TabIndex = 0;
             LabelResult.Text = "LabelResult";
             // 
             // LabelSelect
             // 
             LabelSelect.AutoSize = true;
-            LabelSelect.Location = new Point(12, 63);
+            LabelSelect.Location = new Point(19, 101);
+            LabelSelect.Margin = new Padding(5, 0, 5, 0);
             LabelSelect.Name = "LabelSelect";
-            LabelSelect.Size = new Size(38, 15);
+            LabelSelect.Size = new Size(64, 24);
             LabelSelect.TabIndex = 1;
-            LabelSelect.Text = "Select";
+            LabelSelect.Text = "选择：";
             // 
             // ComboResult
             // 
             ComboResult.FormattingEnabled = true;
-            ComboResult.Location = new Point(12, 81);
+            ComboResult.Location = new Point(19, 130);
+            ComboResult.Margin = new Padding(5, 5, 5, 5);
             ComboResult.Name = "ComboResult";
-            ComboResult.Size = new Size(435, 23);
+            ComboResult.Size = new Size(681, 32);
             ComboResult.TabIndex = 2;
             // 
             // LabelHint
             // 
             LabelHint.AutoSize = true;
-            LabelHint.Location = new Point(12, 117);
+            LabelHint.Location = new Point(19, 187);
+            LabelHint.Margin = new Padding(5, 0, 5, 0);
             LabelHint.Name = "LabelHint";
-            LabelHint.Size = new Size(359, 45);
+            LabelHint.Size = new Size(426, 72);
             LabelHint.TabIndex = 3;
-            LabelHint.Text = "If your game is not listed above, you can either:\r\n1. Open the game now and the unlocker will try to find it's location\r\n2. Use the browse button below";
+            LabelHint.Text = "如果游戏未在上方显示，你可以：\r\n1. 现在启动游戏，然后解锁器会尝试找到它的路径；\r\n2. 使用下面的浏览按钮。";
             // 
             // BtnBrowse
             // 
-            BtnBrowse.Location = new Point(12, 176);
+            BtnBrowse.Location = new Point(19, 282);
+            BtnBrowse.Margin = new Padding(5, 5, 5, 5);
             BtnBrowse.Name = "BtnBrowse";
-            BtnBrowse.Size = new Size(75, 23);
+            BtnBrowse.Size = new Size(118, 37);
             BtnBrowse.TabIndex = 4;
-            BtnBrowse.Text = "Browse";
+            BtnBrowse.Text = "浏览";
             BtnBrowse.UseVisualStyleBackColor = true;
             BtnBrowse.Click += BtnBrowse_Click;
             // 
             // BtnConfirm
             // 
-            BtnConfirm.Location = new Point(372, 176);
+            BtnConfirm.Location = new Point(585, 282);
+            BtnConfirm.Margin = new Padding(5, 5, 5, 5);
             BtnConfirm.Name = "BtnConfirm";
-            BtnConfirm.Size = new Size(75, 23);
+            BtnConfirm.Size = new Size(118, 37);
             BtnConfirm.TabIndex = 5;
-            BtnConfirm.Text = "Confirm";
+            BtnConfirm.Text = "确定";
             BtnConfirm.UseVisualStyleBackColor = true;
             BtnConfirm.Click += BtnConfirm_Click;
             // 
             // LabelCurrentPath
             // 
-            LabelCurrentPath.Location = new Point(12, 9);
+            LabelCurrentPath.Location = new Point(19, 14);
+            LabelCurrentPath.Margin = new Padding(5, 0, 5, 0);
             LabelCurrentPath.Name = "LabelCurrentPath";
-            LabelCurrentPath.Size = new Size(435, 39);
+            LabelCurrentPath.Size = new Size(684, 62);
             LabelCurrentPath.TabIndex = 6;
             LabelCurrentPath.Text = "LabelCurrentPath";
             // 
@@ -109,9 +116,9 @@
             // 
             // SetupForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(459, 211);
+            ClientSize = new Size(721, 338);
             Controls.Add(LabelCurrentPath);
             Controls.Add(BtnConfirm);
             Controls.Add(BtnBrowse);
@@ -120,11 +127,12 @@
             Controls.Add(LabelSelect);
             Controls.Add(LabelResult);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(5, 5, 5, 5);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "SetupForm";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Setup";
+            Text = "游戏路径";
             FormClosing += SetupForm_FormClosing;
             Load += SetupForm_Load;
             ResumeLayout(false);

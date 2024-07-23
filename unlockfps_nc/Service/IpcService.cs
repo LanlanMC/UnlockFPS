@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.MemoryMappedFiles;
-using System.Linq;
-using System.Net.NetworkInformation;
+﻿using System.IO.MemoryMappedFiles;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using unlockfps_nc.Utility;
 
 namespace unlockfps_nc.Service
@@ -55,8 +49,8 @@ namespace unlockfps_nc.Service
             _stubModule = Native.LoadLibrary(_stubPath);
             if (_stubModule == IntPtr.Zero)
             {
-                string errorMessage = $@"Failed to load stub module: {Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
-                MessageBox.Show(errorMessage, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string errorMessage = $@"无法加载桩模块：{Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
+                MessageBox.Show(errorMessage, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -67,15 +61,15 @@ namespace unlockfps_nc.Service
             _wndHook = Native.SetWindowsHookEx(3, stubWndProc, _stubModule, threadId);
             if (_wndHook == IntPtr.Zero)
             {
-                string errorMessage = $@"Failed to set window hook: {Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
+                string errorMessage = $@"无法设置窗口钩子：{Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
                 MessageBox.Show(errorMessage, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (!Native.PostThreadMessage(threadId, 0, IntPtr.Zero, IntPtr.Zero))
             {
-                string errorMessage = $@"Failed to post thread message: {Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
-                MessageBox.Show(errorMessage, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string errorMessage = $@"发布线程消息失败：{Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
+                MessageBox.Show(errorMessage, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -90,7 +84,7 @@ namespace unlockfps_nc.Service
 
                 if (retryCount >= 10)
                 {
-                    MessageBox.Show(@"Failed to start the unlocker.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(@"无法启动解锁器", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 

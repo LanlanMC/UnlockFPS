@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Win32;
 using System.Diagnostics;
-using System.Linq;
-using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using unlockfps_nc.Model;
 using unlockfps_nc.Utility;
 
@@ -64,13 +59,13 @@ namespace unlockfps_nc.Service
         {
             if (!File.Exists(_config.GamePath))
             {
-                MessageBox.Show(@"Game path is invalid.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"游戏路径无效", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             if (IsGameRunning())
             {
-                MessageBox.Show(@"An instance of the game is already running.", @"Error", MessageBoxButtons.OK,
+                MessageBox.Show(@"游戏的一个实例已在运行", @"错误", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return false;
             }
@@ -139,19 +134,21 @@ namespace unlockfps_nc.Service
             uint creationFlag = _config.SuspendLoad ? 4u : 0u;
             var gameFolder = Path.GetDirectoryName(_config.GamePath);
 
+            ApplyHDR();
+
             if (!Native.CreateProcess(_config.GamePath, BuildCommandLine(), IntPtr.Zero, IntPtr.Zero, false, creationFlag, IntPtr.Zero, gameFolder, ref si, out var pi))
             {
                 MessageBox.Show(
-                    $@"CreateProcess failed ({Marshal.GetLastWin32Error()}){Environment.NewLine} {Marshal.GetLastPInvokeErrorMessage()}",
-                    @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    $@"CreateProcess 失败 ({Marshal.GetLastWin32Error()}){Environment.NewLine} {Marshal.GetLastPInvokeErrorMessage()}",
+                    @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (!ProcessUtils.InjectDlls(pi.hProcess, _config.DllList))
             {
                 MessageBox.Show(
-                    $@"Dll Injection failed ({Marshal.GetLastWin32Error()}){Environment.NewLine} {Marshal.GetLastPInvokeErrorMessage()}",
-                    @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    $@"Dll注入失败 ({Marshal.GetLastWin32Error()}){Environment.NewLine} {Marshal.GetLastPInvokeErrorMessage()}",
+                    @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             if (_config.SuspendLoad)
@@ -237,6 +234,21 @@ namespace unlockfps_nc.Service
             return commandLine;
         }
 
+        private bool ApplyHDR()
+        {
+            try
+            {
+                using RegistryKey HDRKey = Registry.CurrentUser.CreateSubKey(@"Software\miHoYo\原神");
+                HDRKey.SetValue(@"WINDOWS_HDR_ON_h3132281285", _config.UseHDR ? 1 : 0); 
+            }
+            catch
+            {
+                MessageBox.Show(@"无法启用HDR", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return _config.UseHDR;
+        }
+
         private unsafe bool SetupData()
         {
             var gameDir = Path.GetDirectoryName(_config.GamePath);
@@ -259,8 +271,8 @@ namespace unlockfps_nc.Service
                 }
 
                 MessageBox.Show(
-                    @"Failed to load UnityPlayer.dll or UserAssembly.dll",
-                    @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    @"无法加载UnityPlayer.dll 或 UserAssembly.dll",
+                    @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -331,8 +343,8 @@ namespace unlockfps_nc.Service
 
             BAD_PATTERN:
             MessageBox.Show(
-                @"outdated fps pattern",
-                @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                @"过时的FPS模式",
+                @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
 
@@ -391,8 +403,8 @@ namespace unlockfps_nc.Service
             if (_remoteUnityPlayer == IntPtr.Zero || _remoteUserAssembly == IntPtr.Zero)
             {
                 MessageBox.Show(
-                    @"Failed to get remote module base address",
-                    @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    @"无法获取远程模块基址",
+                    @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 

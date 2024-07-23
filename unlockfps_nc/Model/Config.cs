@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace unlockfps_nc.Model
+﻿namespace unlockfps_nc.Model
 {
     public class Config
     {
-        public string GamePath { get; set; } = "";
-
+        public string GamePath { get; set; } = "请选择路径";
         public bool AutoStart { get; set; }
         public bool AutoClose { get; set; }
         public bool PopupWindow { get; set; }
@@ -21,12 +14,14 @@ namespace unlockfps_nc.Model
         public bool SuspendLoad { get; set; }
         public bool UseMobileUI { get; set; }
 
+        public bool UseHDR { get; set; }
+
         public int FPSTarget { get; set; } = 120;
         public int CustomResX { get; set; } = 1920;
         public int CustomResY { get; set; } = 1080;
         public int MonitorNum { get; set; } = 1;
         public int Priority { get; set; } = 3;
 
-        public List<string> DllList { get; set; } = new();
+        public List<string> DllList { get; set; } = [];
     }
 }

@@ -15,14 +15,14 @@ namespace unlockfps_nc
         {
             if (File.Exists("YuanShen.exe") || File.Exists("GenshinImpact.exe"))
             {
-                MessageBox.Show(@"Do not place the unlocker in the game folder.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"不要将解锁器放在游戏文件夹中", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             MutexHandle = Native.CreateMutex(IntPtr.Zero, true, @"GenshinFPSUnlocker");
             if (Marshal.GetLastWin32Error() == 183)
             {
-                MessageBox.Show(@"Another unlocker is already running.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"另一个解锁器已在运行", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             

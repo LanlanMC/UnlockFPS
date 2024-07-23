@@ -13,9 +13,7 @@ namespace unlockfps_nc
         private readonly Config _config;
         private readonly ProcessService _processService;
 
-        public MainForm(
-            ConfigService configService,
-            ProcessService processService)
+        public MainForm(ConfigService configService, ProcessService processService)
         {
             InitializeComponent();
             _configService = configService;

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System.Data;
 using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using unlockfps_nc.Model;
 using unlockfps_nc.Service;
 
@@ -44,6 +36,7 @@ namespace unlockfps_nc
             CBFullscreen.DataBindings.Add("Checked", _config, "Fullscreen", true, DataSourceUpdateMode.OnPropertyChanged);
             CBCustomRes.DataBindings.Add("Checked", _config, "UseCustomRes", true, DataSourceUpdateMode.OnPropertyChanged);
             CBUseMobileUI.DataBindings.Add("Checked", _config, "UseMobileUI", true, DataSourceUpdateMode.OnPropertyChanged);
+            CBUseHDR.DataBindings.Add("Checked", _config, "UseHDR", true, DataSourceUpdateMode.OnPropertyChanged);
             InputResX.DataBindings.Add("Value", _config, "CustomResX", true, DataSourceUpdateMode.OnPropertyChanged);
             InputResY.DataBindings.Add("Value", _config, "CustomResY", true, DataSourceUpdateMode.OnPropertyChanged);
             ComboFullscreenMode.DataBindings.Add("SelectedIndex", _config, "IsExclusiveFullscreen", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -101,8 +94,8 @@ namespace unlockfps_nc
             var selectedFiles = DllAddDialog.FileNames.ToList();
             selectedFiles = selectedFiles
                 .Where(x => VerifyDll(x) || MessageBox.Show(
-                    $@"Invalid File: {Environment.NewLine}{x}{Environment.NewLine}{Environment.NewLine}Only native x64 dlls are supported",
-                    @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error) != DialogResult.OK)
+                    $@"无效的文件：{Environment.NewLine}{x}{Environment.NewLine}{Environment.NewLine}只支持原生64位dll",
+                    @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error) != DialogResult.OK)
                 .Where(x => !_config.DllList.Contains(x))
                 .ToList();
 

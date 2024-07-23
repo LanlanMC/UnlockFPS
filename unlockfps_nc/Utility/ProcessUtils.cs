@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace unlockfps_nc.Utility
 {
@@ -194,8 +188,8 @@ namespace unlockfps_nc.Utility
                 var errorCode = Marshal.GetLastWin32Error();
                 if (errorCode != 299)
                 {
-                    MessageBox.Show($@"EnumProcessModulesEx failed ({errorCode}){Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}"
-                        , @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($@"EnumProcessModulesEx 失败 ({errorCode}){Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}"
+                        , @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return IntPtr.Zero;
                 }
             }
