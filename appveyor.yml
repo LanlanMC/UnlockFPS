@@ -19,6 +19,6 @@ artifacts:
 - path: unlockfps_nc\bin\ReleaseMin\net8.0-windows\win-x64\publish\**\*.exe
 deploy:
 - provider: Webhook
-  url: https://app.signpath.io/API/v1/9aaa881d-b8d0-4e48-800c-53215f1c8198/Integrations/AppVeyor?ProjectSlug=genshin-fps-unlock&SigningPolicySlug=test-signing
+  url: https://app.signpath.io/API/v1/9aaa881d-b8d0-4e48-800c-53215f1c8198/Integrations/AppVeyor?ProjectSlug=genshin-fps-unlock&SigningPolicySlug=release-signing
   authorization:
     secure: LJqK7hw1sX5isXvSGUCegEbtwm39QW2Nf2NCPOFhJBDNluQT0968km8XT/3dHgzcxGuzTq8ZxF0WoubcT7u9vg==
