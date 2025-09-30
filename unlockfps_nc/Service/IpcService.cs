@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.MemoryMappedFiles;
-using System.Linq;
-using System.Net.NetworkInformation;
+﻿using System.IO.MemoryMappedFiles;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using unlockfps_nc.Utility;
+using unlockfps.Utility;
 
-namespace unlockfps_nc.Service
+namespace unlockfps.Service
 {
     public enum IpcStatus
     {
@@ -38,8 +32,9 @@ namespace unlockfps_nc.Service
         {
             _sharedMemory ??= MemoryMappedFile.CreateOrOpen(@"Global\2DE95FDC-6AB7-4593-BFE6-760DD4AB422B", 4096, MemoryMappedFileAccess.ReadWrite);
             _sharedMemoryAccessor ??= _sharedMemory.CreateViewAccessor();
-            if (_sharedMemoryAccessor == null) {
-                MessageBox.Show(@"Failed to create shared memory.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (_sharedMemoryAccessor == null)
+            {
+                MessageBox.Show(@"无法创建共享内存", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -55,8 +50,8 @@ namespace unlockfps_nc.Service
             _stubModule = Native.LoadLibrary(_stubPath);
             if (_stubModule == IntPtr.Zero)
             {
-                string errorMessage = $@"Failed to load stub module: {Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
-                MessageBox.Show(errorMessage, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string errorMessage = $@"无法加载桩模块: {Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
+                MessageBox.Show(errorMessage, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -67,20 +62,21 @@ namespace unlockfps_nc.Service
             _wndHook = Native.SetWindowsHookEx(3, stubWndProc, _stubModule, threadId);
             if (_wndHook == IntPtr.Zero)
             {
-                string errorMessage = $@"Failed to set window hook: {Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
-                MessageBox.Show(errorMessage, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string errorMessage = $@"无法设置窗口钩子：{Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
+                MessageBox.Show(errorMessage, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             if (!Native.PostThreadMessage(threadId, 0, IntPtr.Zero, IntPtr.Zero))
             {
-                string errorMessage = $@"Failed to post thread message: {Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
-                MessageBox.Show(errorMessage, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string errorMessage = $@"无法发布线程信息：{Marshal.GetLastWin32Error()}{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}";
+                MessageBox.Show(errorMessage, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             int retryCount = 0;
-            while (true) {
+            while (true)
+            {
                 _sharedMemoryAccessor.Read(0, out ipcData);
 
                 if (ipcData.Status == IpcStatus.Ready)
@@ -89,8 +85,9 @@ namespace unlockfps_nc.Service
                 if (ipcData.Status == IpcStatus.Error)
                     return false;
 
-                if (retryCount >= 10) {
-                    MessageBox.Show(@"Failed to start the unlocker.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (retryCount >= 10)
+                {
+                    MessageBox.Show(@"无法启动解锁器", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
 
@@ -129,7 +126,8 @@ namespace unlockfps_nc.Service
 
             var filePath = Path.Combine(AppContext.BaseDirectory, "UnlockerStub.dll");
 
-            try {
+            try
+            {
                 using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
                 stream.CopyTo(fileStream);
             }

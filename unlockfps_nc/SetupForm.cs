@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using Microsoft.Win32;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.Win32;
-using unlockfps_nc.Model;
-using unlockfps_nc.Service;
-using unlockfps_nc.Utility;
+using unlockfps.Model;
+using unlockfps.Service;
+using unlockfps.Utility;
 
-namespace unlockfps_nc
+namespace unlockfps
 {
     public partial class SetupForm : Form
     {
@@ -34,8 +25,8 @@ namespace unlockfps_nc
             _cts = new();
             Task.Run(PollProcess, _cts.Token);
 
-            LabelCurrentPath.Text = $@"Current Path: {_config.GamePath}";
-            LabelResult.Text = @"Searching...";
+            LabelCurrentPath.Text = $@"当前路径：{_config.GamePath}";
+            LabelResult.Text = @"搜索中...";
             LabelResult.ForeColor = Color.Orange;
             Task.Run(SearchGamePath, _cts.Token);
         }
@@ -91,12 +82,12 @@ namespace unlockfps_nc
 
                 if (string.IsNullOrEmpty(processPath))
                 {
-                    MessageBox.Show(@$"Failed to find process path{Environment.NewLine}Please use ""Browse"" instead", @"Error",
+                    MessageBox.Show(@$"查找进程路径失败{Environment.NewLine}请使用 ""浏览""", @"错误",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                MessageBox.Show($@"Game Found!{Environment.NewLine}{processPath}", @"Success", MessageBoxButtons.OK,
+                MessageBox.Show($@"游戏找到！{Environment.NewLine}{processPath}", @"成功", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
                 _config.GamePath = processPath;
@@ -115,12 +106,14 @@ namespace unlockfps_nc
             var installPathGlobal = hypGlobal?.GetValue("GameInstallPath") as string;
             var installPathCn = hypCn?.GetValue("GameInstallPath") as string;
 
-            if (installPathGlobal != null) {
+            if (installPathGlobal != null)
+            {
                 var path = Path.Combine(installPathGlobal, "GenshinImpact.exe");
                 gamePaths.Add(path.Replace('/', '\\'));
             }
 
-            if (installPathCn != null) {
+            if (installPathCn != null)
+            {
                 var path = Path.Combine(installPathCn, "YuanShen.exe");
                 gamePaths.Add(path.Replace('/', '\\'));
             }
@@ -128,7 +121,7 @@ namespace unlockfps_nc
             Invoke(() =>
             {
                 LabelResult.ForeColor = gamePaths.Count > 0 ? Color.Green : Color.Red;
-                LabelResult.Text = $@"Found {gamePaths.Count} installation of the game";
+                LabelResult.Text = $@"找到 {gamePaths.Count} 个游戏安装";
                 ComboResult.Items.AddRange(gamePaths.ToArray());
                 if (gamePaths.Count > 0)
                     ComboResult.SelectedIndex = 0;
@@ -147,15 +140,15 @@ namespace unlockfps_nc
             if (fileName != "GenshinImpact" && fileName != "YuanShen")
             {
                 MessageBox.Show(
-                    $@"Please select the game exe{Environment.NewLine}GenshinImpact.exe or YuanShen.exe",
-                    @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    $@"请选择游戏exe：{Environment.NewLine}GenshinImpact.exe 或 YuanShen.exe",
+                    @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             var dataDir = Path.Combine(directory, $"{fileName}_Data");
             if (!Directory.Exists(dataDir))
             {
-                MessageBox.Show(@"That's not the right place", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"这不是正确的路径", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

@@ -365,3 +365,5 @@ FodyWeavers.xsd
 *.dll
 *.lib
 *.exp
+
+unlockfps_nc/build/

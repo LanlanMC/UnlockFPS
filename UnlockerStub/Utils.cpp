@@ -135,12 +135,12 @@ void Utils::ShowWin32Error(const std::wstring& apiName)
 	const auto errorCode = GetLastError();
 	const auto errorMessage = GetErrorMessage(errorCode);
 	
-	std::wstring message = std::format(L"{} failed\nError code: {}\nError message: {}", apiName, errorCode, errorMessage);
+	std::wstring message = std::format(L"{} Ê§°Ü\n´íÎó´úÂë£º{}\n´íÎóĞÅÏ¢£º{}", apiName, errorCode, errorMessage);
 	ShowError(message);
 
 }
 
 void Utils::ShowError(const std::wstring& message)
 {
-	MessageBoxW(nullptr, message.c_str(), L"[FPS Unlocker] Error", MB_ICONERROR);
+	MessageBoxW(nullptr, message.c_str(), L"[FPS ½âËøÆ÷] ´íÎó", MB_ICONERROR);
 }

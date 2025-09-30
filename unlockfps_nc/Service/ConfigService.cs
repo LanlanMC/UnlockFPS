@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using unlockfps_nc.Model;
+using unlockfps.Model;
 
-namespace unlockfps_nc.Service
+namespace unlockfps.Service
 {
     public class ConfigService
     {
@@ -38,7 +34,7 @@ namespace unlockfps_nc.Service
 
         private void Sanitize()
         {
-            Config.FPSTarget = Math.Clamp(Config.FPSTarget, 1, 420);
+            Config.FPSTarget = Math.Clamp(Config.FPSTarget, 1, Int32.MaxValue);
             Config.Priority = Math.Clamp(Config.Priority, 0, 5);
             Config.CustomResX = Math.Clamp(Config.CustomResX, 200, 7680);
             Config.CustomResY = Math.Clamp(Config.CustomResY, 200, 4320);
@@ -53,26 +49,32 @@ namespace unlockfps_nc.Service
 
         public void Save()
         {
-            lock (_lock) {
+            lock (_lock)
+            {
                 var configPath = GetFullPath();
                 var json = JsonSerializer.Serialize(Config, new JsonSerializerOptions { WriteIndented = true });
 
                 bool wasHidden = false;
-                if (File.Exists(configPath)) {
+                if (File.Exists(configPath))
+                {
                     var attributes = File.GetAttributes(configPath);
-                    if ((attributes & FileAttributes.Hidden) != 0) {
+                    if ((attributes & FileAttributes.Hidden) != 0)
+                    {
                         wasHidden = true;
                         File.SetAttributes(configPath, attributes & ~FileAttributes.Hidden);
                     }
                 }
 
-                try {
+                try
+                {
                     using var fs = new FileStream(configPath, FileMode.Create, FileAccess.Write, FileShare.None, 4096, FileOptions.WriteThrough);
                     using var sw = new StreamWriter(fs, Encoding.UTF8);
                     sw.Write(json);
                 }
-                finally {
-                    if (wasHidden && File.Exists(configPath)) {
+                finally
+                {
+                    if (wasHidden && File.Exists(configPath))
+                    {
                         var attributes = File.GetAttributes(configPath);
                         File.SetAttributes(configPath, attributes | FileAttributes.Hidden);
                     }

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace unlockfps_nc.Utility
+namespace unlockfps.Utility
 {
     internal class ProcessUtils
     {
@@ -118,7 +112,7 @@ namespace unlockfps_nc.Utility
 
             if (Native.IsWine())
                 Native.VirtualProtect(module, sizeOfImage, MemoryProtection.EXECUTE_READWRITE, out _);
-            
+
             var span = new ReadOnlySpan<byte>(scanBytes, (int)sizeOfImage);
             var offsets = new List<IntPtr>();
 
@@ -187,8 +181,8 @@ namespace unlockfps_nc.Utility
                 var errorCode = Marshal.GetLastWin32Error();
                 if (errorCode != 299)
                 {
-                    MessageBox.Show($@"EnumProcessModulesEx failed ({errorCode}){Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}"
-                        , @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($@"EnumProcessModulesEx 失败（{errorCode}）{Environment.NewLine}{Marshal.GetLastPInvokeErrorMessage()}"
+                        , @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return IntPtr.Zero;
                 }
             }

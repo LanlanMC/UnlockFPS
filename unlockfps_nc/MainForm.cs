@@ -1,10 +1,10 @@
+using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
 using System.Text.Json;
-using Microsoft.Extensions.DependencyInjection;
-using unlockfps_nc.Model;
-using unlockfps_nc.Service;
+using unlockfps.Model;
+using unlockfps.Service;
 
-namespace unlockfps_nc
+namespace unlockfps
 {
     public partial class MainForm : Form
     {
@@ -43,7 +43,7 @@ namespace unlockfps_nc
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            _ = Task.Run(CheckVersion);
+            // _ = Task.Run(CheckVersion);  This is for the original version, not this modified version
 
             _windowLocation = Location;
             _windowSize = Size;
@@ -91,9 +91,10 @@ namespace unlockfps_nc
 
         private void NotifyAndHide()
         {
-            if (!_notifyOnce) {
+            if (!_notifyOnce)
+            {
                 NotifyIconMain.Visible = true;
-                NotifyIconMain.Text = $@"FPS Unlocker (FPS: {_config.FPSTarget})";
+                NotifyIconMain.Text = $@"FPS 解锁器（FPS: {_config.FPSTarget}）";
                 NotifyIconMain.ShowBalloonTip(500);
                 _notifyOnce = true;
             }
@@ -120,7 +121,8 @@ namespace unlockfps_nc
 
         public void RestoreFromTray()
         {
-            if (InvokeRequired) {
+            if (InvokeRequired)
+            {
                 Invoke(RestoreFromTray);
                 return;
             }
@@ -131,7 +133,7 @@ namespace unlockfps_nc
             Show();
             Activate();
             TopMost = false;
-            
+
             Location = _windowLocation;
             Size = _windowSize;
         }
@@ -146,7 +148,7 @@ namespace unlockfps_nc
                 response.EnsureSuccessStatusCode();
                 var content = await response.Content.ReadAsStringAsync();
                 var remoteVersion = JsonSerializer.Deserialize<VersionInfo>(content);
-                
+
                 if (remoteVersion == null || remoteVersion.Version <= Program.Version)
                     return;
 
@@ -155,15 +157,16 @@ namespace unlockfps_nc
                 if (utcNow - lastNotify < TimeSpan.FromDays(7))
                     return;
 
-                var message = $@"A new version is available!{Environment.NewLine}" +
-                              $@"Current version: {Program.Version}{Environment.NewLine}" +
-                              $@"Latest version: {remoteVersion.Version}{Environment.NewLine}" +
-                              $@"Would you like to go to the release page?";
+                var message = $@"找到新版本！{Environment.NewLine}" +
+                              $@"当前版本：{Program.Version}{Environment.NewLine}" +
+                              $@"最新版本: {remoteVersion.Version}{Environment.NewLine}" +
+                              $@"你想要前往发布页吗？";
 
-                var result = MessageBox.Show(message, @"FPS Unlocker", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1,
+                var result = MessageBox.Show(message, @"FPS 解锁器", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
-                
-                if (result == DialogResult.Yes) {
+
+                if (result == DialogResult.Yes)
+                {
                     var psi = new ProcessStartInfo
                     {
                         FileName = remoteVersion.Url,
@@ -171,7 +174,8 @@ namespace unlockfps_nc
                     };
                     Process.Start(psi);
                 }
-                else {
+                else
+                {
                     _config.LastVersionNotify = utcNow.ToUnixTimeSeconds();
                     _configService.Save();
                 }

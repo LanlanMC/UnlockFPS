@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace unlockfps_nc.Model
+﻿namespace unlockfps.Model
 {
     public class Config
     {

@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System.Data;
 using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using unlockfps_nc.Model;
-using unlockfps_nc.Service;
+using unlockfps.Model;
+using unlockfps.Service;
 
-namespace unlockfps_nc
+namespace unlockfps
 {
     public partial class SettingsForm : Form
     {
@@ -39,7 +31,7 @@ namespace unlockfps_nc
             CBPowerSave.DataBindings.Add("Checked", _config, "UsePowerSave", true, DataSourceUpdateMode.OnPropertyChanged);
             CBHdr.DataBindings.Add("Checked", _config, "UseHDR", true, DataSourceUpdateMode.OnPropertyChanged);
             ComboPriority.DataBindings.Add("SelectedIndex", _config, "Priority", true, DataSourceUpdateMode.OnPropertyChanged);
-            
+
             // Launch Options
             CBPopup.DataBindings.Add("Checked", _config, "PopupWindow", true, DataSourceUpdateMode.OnPropertyChanged);
             CBFullscreen.DataBindings.Add("Checked", _config, "Fullscreen", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -98,12 +90,12 @@ namespace unlockfps_nc
         {
             if (DllAddDialog.ShowDialog() != DialogResult.OK)
                 return;
-            
+
             var selectedFiles = DllAddDialog.FileNames.ToList();
             selectedFiles = selectedFiles
                 .Where(x => VerifyDll(x) || MessageBox.Show(
-                    $@"Invalid File: {Environment.NewLine}{x}{Environment.NewLine}{Environment.NewLine}Only native x64 dlls are supported",
-                    @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error) != DialogResult.OK)
+                    $@"无效文件: {Environment.NewLine}{x}{Environment.NewLine}{Environment.NewLine}只支持原生 x64 DLL",
+                    @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error) != DialogResult.OK)
                 .Where(x => !_config.DllList.Contains(x))
                 .ToList();
 
@@ -145,7 +137,7 @@ namespace unlockfps_nc
             var selectedIndex = ListBoxDlls.SelectedIndex;
             if (selectedIndex == -1)
                 return;
-            
+
             _config.DllList.RemoveAt(selectedIndex);
             RefreshDllList();
         }

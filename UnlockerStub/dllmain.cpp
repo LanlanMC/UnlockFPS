@@ -51,7 +51,7 @@ LONG __stdcall VectoredExceptionHandler(PEXCEPTION_POINTERS ExceptionInfo)
 		MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hFile, MiniDumpNormal, &dumpInfo, nullptr, nullptr);
 		CloseHandle(hFile);
 
-		Utils::ShowError(L"An unhandled exception has occurred, a crash dump has been saved to crashdump.dmp");
+		Utils::ShowError(L"发生了一个未处理的异常，崩溃转储已保存至 crashdump.dmp");
 		ExitThread(1);
 	}
 
@@ -78,7 +78,7 @@ bool SetupData()
 
 	if (il2cppSection.empty())
 	{
-		Utils::ShowError(L"Failed to find il2cpp section");
+		Utils::ShowError(L"无法找到 il2cpp 区段");
 		return false;
 	}
 
@@ -92,7 +92,7 @@ bool SetupData()
 
 	if (targetEntry.empty())
 	{
-		Utils::ShowError(L"outdated pattern");
+		Utils::ShowError(L"过失的模式");
 		return false;
 	}
 
@@ -115,7 +115,7 @@ bool SetupData()
 		mbi.Protect != PAGE_EXECUTE_WRITECOPY)
 	{
 		wchar_t msg[256]{};
-		swprintf_s(msg, L"invalid address\naddress %p is not writable\npage protection: 0x%X", pFramerate, mbi.Protect);
+		swprintf_s(msg, L"无效地址\n地址 %p 不可写\n页保护: 0x%X", pFramerate, mbi.Protect);
 
 		Utils::ShowError(msg);
 		return false;

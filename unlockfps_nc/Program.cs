@@ -1,11 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Security.Principal;
-using unlockfps_nc.Service;
-using unlockfps_nc.Utility;
+using unlockfps.Service;
 
-namespace unlockfps_nc
+namespace unlockfps
 {
     internal static class Program
     {
@@ -25,9 +23,11 @@ namespace unlockfps_nc
 
             using var mutex = new Mutex(true, MutexName, out var isFirst);
 
-            if (!isFirst) {
+            if (!isFirst)
+            {
                 // second instance
-                try {
+                try
+                {
                     using var evt = EventWaitHandle.OpenExisting(EventName);
                     evt.Set();
                 }
@@ -36,22 +36,27 @@ namespace unlockfps_nc
             }
 
             using var showEvent = new EventWaitHandle(false, EventResetMode.AutoReset, EventName);
-            _ = Task.Run(() => {
-                while (showEvent.WaitOne()) {
+            _ = Task.Run(() =>
+            {
+                while (showEvent.WaitOne())
+                {
 
                     var form = Application.OpenForms
                         .OfType<MainForm>()
                         .FirstOrDefault();
 
-                    if (form is { IsHandleCreated: true }) {
+                    if (form is { IsHandleCreated: true })
+                    {
                         form.RestoreFromTray();
                     }
 
                 }
             });
 
-            if (!IsAdministrator()) {
-                try {
+            if (!IsAdministrator())
+            {
+                try
+                {
                     ProcessStartInfo processInfo = new ProcessStartInfo
                     {
                         FileName = Application.ExecutablePath,
@@ -60,7 +65,8 @@ namespace unlockfps_nc
                     };
                     Process.Start(processInfo);
                 }
-                catch {
+                catch
+                {
                     // ignored
                 }
 
